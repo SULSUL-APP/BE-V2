@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    include:
+      - security
+      - oauth
+      - s3
+      - fcm
+      - redis
+
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: ${URL}
+      username: ${USERNAME}
+      password: ${USERPASSWORD}
+
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+springdoc:
+  packages-to-exclude: "com.example.sulsul.health"
+  swagger-ui:
+    path: /api-docs
+
+
+logging:
+  level:
+    #    org.hibernate.SQL: debug
+    com.amazonaws.util.EC2MetadataUtils: error # Failed to connect to service endpoint 에러 무시
+
+domain:
+  name: http://www.localhost:8081
